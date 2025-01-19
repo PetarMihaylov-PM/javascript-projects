@@ -1,0 +1,3 @@
+Quote Generator
+
+A simple JavaScript application that generates random quotes each time the user clicks a button. The project demonstrates the use of fetch, event handling, and dynamic content manipulation in JavaScript. Perfect for practicing DOM manipulation and building interactive web applications.
