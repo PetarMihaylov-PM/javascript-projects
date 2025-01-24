@@ -8,4 +8,6 @@ Each project focuses on different concepts, including DOM manipulation, event ha
 - Random Quote Generator
 - To-Do List App
 - Calculator
-And more...
+- QR Code Generator
+- Music player
+  And more to come...
