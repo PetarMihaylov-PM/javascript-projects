@@ -10,4 +10,5 @@ Each project focuses on different concepts, including DOM manipulation, event ha
 - Calculator
 - QR Code Generator
 - Music player
+#
   And more to come...
