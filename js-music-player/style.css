@@ -58,6 +58,7 @@ nav .circle{
   border-radius: 4px;
   cursor: pointer;
   margin: 40px 0;
+  box-shadow: 0 5px 8px rgb(255, 255, 255);
 }
 #progress::-webkit-slider-thumb{
   -webkit-appearance: none;
@@ -65,5 +66,29 @@ nav .circle{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  border: 3.5px solid rgb(66, 104, 51);
+  border: 3px solid rgb(216, 232, 210);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.364);
+}
+.controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.controls div{
+  width: 60px;
+  height: 60px;
+  margin: 20px;
+  background-color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: rgb(43, 133, 43);
+  box-shadow: 0 5px 10px rgba(17, 165, 32, 0.314);
+  cursor: pointer;
+}
+.controls div:nth-child(2){
+  transform: scale(1.4);
+  background: rgb(43, 133, 43);
+  color: white;
 }
