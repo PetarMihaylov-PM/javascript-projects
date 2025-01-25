@@ -3,6 +3,7 @@
 let prograssBar = document.getElementById('progress');
 let song = document.getElementById('song');
 let playPauseButton = document.getElementById('playPause');
+let icon = document.getElementById('icon');
 
 playPauseButton.addEventListener('click', stopStart);
 
@@ -12,14 +13,28 @@ song.onloadedmetadata = function(){
 }
 
 function stopStart(){
-  if(playPauseButton.classList.contains("fa-pause")){
+  if(icon.classList.contains("fa-pause")){
     song.pause();
-    playPauseButton.classList.remove("fa-pause"); 
-    playPauseButton.classList.add("fa-play"); 
+    icon.classList.remove("fa-pause"); 
+    icon.classList.add("fa-play"); 
   }
   else{
     song.play();
-    playPauseButton.classList.remove("fa-play"); 
-    playPauseButton.classList.add("fa-pause"); 
+    if(song.play()){
+      setInterval(() => {
+        prograssBar.value = song.currentTime;
+      },250)
+    }
+    icon.classList.remove("fa-play"); 
+    icon.classList.add("fa-pause"); 
   }
+}
+
+
+
+prograssBar.onchange = function(){
+  song.play();
+  song.currentTime = prograssBar.value;
+  icon.classList.remove("fa-play"); 
+  icon.classList.add("fa-pause"); 
 }
