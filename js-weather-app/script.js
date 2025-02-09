@@ -13,25 +13,14 @@ weatherForm.addEventListener("submit", async event =>{
     const city = cityInput.value;
 
     if(city){
-        if(city === 'kris'){
-            const name = document.createElement('h1');
-
-            card.textContent = "";
-            card.style.display = "flex";
-            name.textContent = "Kris e gei, a ne grad!"
-
-            name.classList.add("cityDisplay");
-
-            card.appendChild(name);
+        
+        try{
+        const weatherData = await getWeaterData(city);
+        displayWeatherInfo(weatherData);
         }
-        else{ 
-            try{
-            const weatherData = await getWeaterData(city);
-            displayWeatherInfo(weatherData);
+        catch(error){
+        displayError(error);
         }
-            catch(error){
-            displayError(error);
-        }}
        
     }
     else{
