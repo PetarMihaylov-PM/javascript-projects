@@ -1,5 +1,6 @@
-import { cart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
+
 let productsHTML = '';
 
 products.forEach(product => {
@@ -58,43 +59,18 @@ products.forEach(product => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-
-
-document.querySelectorAll('.js-add-to-cart')
-  .forEach(button => {
-    let clearId = null;
-    button.addEventListener('click', () => {
-      const productId = button.dataset.productId;
-
-      let matchingItem;
-
-      cart.forEach(element => {
-        if(productId === element.productId){
-          matchingItem = element;
-        }
-      });
-
-      let quantitySelectorValue = document.querySelector(`.js-quantity-selector-${productId}`).value;
-      
-
-      if(matchingItem){
-        matchingItem.quantity += Number(quantitySelectorValue);
-      } else {
-        cart.push({
-          productId: productId,
-          quantity: Number(quantitySelectorValue)
-        });
-      }
-
-      let cartQuantity = 0;
-      cart.forEach(element => {
-        cartQuantity += element.quantity;
+function updateCartQuantity(){
+  let cartQuantity = 0;
+      cart.forEach(cartItem => {
+        cartQuantity += cartItem.quantity;
       })
 
       document.querySelector('.js-cart-quantity')
       .innerHTML = cartQuantity;
+}
 
-      const displayAdded = document.querySelector(`.js-added-to-cart-${productId}`);
+function displayAddedText(productId, clearId){
+  const displayAdded = document.querySelector(`.js-added-to-cart-${productId}`);
       displayAdded.classList.add('added-to-cart');
       displayAdded.style.opacity = '1';
       
@@ -102,6 +78,16 @@ document.querySelectorAll('.js-add-to-cart')
       clearId = setTimeout(() => {
         displayAdded.style.opacity = '0';
       }, 2000);
+}
+
+document.querySelectorAll('.js-add-to-cart')
+  .forEach(button => {
+    let clearId = null;
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId;
+      addToCart(productId);
+      updateCartQuantity();
+      displayAddedText(productId, clearId);
     });
   });
 
