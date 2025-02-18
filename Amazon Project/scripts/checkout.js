@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -113,11 +113,7 @@ document.querySelectorAll(".js-delete-link")
 
 
   function updateCartQuantity () {
-    let cartItemsQuantity = 0;
-    cart.forEach(cartItem => {
-      cartItemsQuantity += cartItem.quantity; 
-    });
 
-    document.querySelector(".js-checkout-cart-quantity").innerHTML = cartItemsQuantity;
+    document.querySelector(".js-checkout-cart-quantity").innerHTML = calculateCartQuantity();
   };
  
