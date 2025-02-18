@@ -212,4 +212,13 @@
 
 .quantity-input {
   width: 30px;
+  display: none;
+}
+
+.save-quantity-input {
+  display: none;
+}
+
+.is-editing-quantity .quantity-input {
+  display: initial;
 }
