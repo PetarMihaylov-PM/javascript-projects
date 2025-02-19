@@ -71,3 +71,8 @@ export function updateQuantity(productId, newQuantity) {
 
   saveToStorage();
 }
+
+export function updateCartQuantity () {
+  document.querySelector(".js-checkout-cart-quantity").innerHTML = calculateCartQuantity();
+  saveToStorage();
+};

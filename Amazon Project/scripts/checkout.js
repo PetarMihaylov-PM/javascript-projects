@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateCartQuantity,updateQuantity } from "../data/cart.js";
+import { cart, removeFromCart, updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -118,11 +118,6 @@ document.querySelectorAll(".js-delete-link")
     });
   });
 
-
-  function updateCartQuantity () {
-    document.querySelector(".js-checkout-cart-quantity").innerHTML = calculateCartQuantity();
-  };
-
   document.querySelectorAll(".js-update-link")
     .forEach(link => {
       link.addEventListener('click', () => {
@@ -170,5 +165,5 @@ document.querySelectorAll(".js-delete-link")
           alert(`Quantity must be at least 1 and less than 1000`);
           return;
         }
-        updateCartQuantity(productId, newQuantity);
+        updateCartQuantity();
     }
