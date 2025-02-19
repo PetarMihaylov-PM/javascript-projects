@@ -43,8 +43,8 @@ cart.forEach(cartItem => {
                   data-product-id="${matchingProduct.id}">
                     Update
                   </span>
-                  <input class="quantity-input">
-                  <span class="save-quantity-input link-primary" data-product-id="${matchingProduct.id}">
+                  <input class="quantity-input js-quantity-input">
+                  <span class="save-quantity-input link-primary js-save-link" data-product-id="${matchingProduct.id}">
                     Save
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
@@ -128,6 +128,25 @@ document.querySelectorAll(".js-delete-link")
         
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.classList.add("is-editing-quantity");
-      })
-    })
+        document.querySelector(".js-update-link").style.display = "none";
+        document.querySelector('.quantity-label').style.display = "none";
+      });
+    });
+
+    document.querySelectorAll(".js-save-link")
+    .forEach(link => {
+      link.addEventListener('click', () => {
+        const productId = link.dataset.productId;
+        
+        const container = document.querySelector(`.js-cart-item-container-${productId}`);
+        container.classList.remove("is-editing-quantity");
+        document.querySelector(".js-update-link").style.display = "initial";
+        let quantityLabel = document.querySelector('.quantity-label');
+        quantityLabel.style.display = "initial";
+
+        const quantityInput = Number(document.querySelector('.js-quantity-input').value);
+        console.log(quantityInput)
+        
+      });
+    });
  

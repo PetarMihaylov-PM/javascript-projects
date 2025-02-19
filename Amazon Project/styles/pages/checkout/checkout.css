@@ -219,6 +219,6 @@
   display: none;
 }
 
-.is-editing-quantity .quantity-input {
+.is-editing-quantity .quantity-input, .is-editing-quantity .save-quantity-input {
   display: initial;
 }
