@@ -139,14 +139,25 @@ document.querySelectorAll(".js-delete-link")
         const productId = link.dataset.productId;
         
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
         container.classList.remove("is-editing-quantity");
         document.querySelector(".js-update-link").style.display = "initial";
+
         let quantityLabel = document.querySelector('.quantity-label');
         quantityLabel.style.display = "initial";
 
         const quantityInput = Number(document.querySelector('.js-quantity-input').value);
-        console.log(quantityInput)
         
+
+        if(quantityInput > 0 && quantityInput < 1000) {
+          cart.forEach(cartItem => {
+            if(cartItem.productId === productId){
+              cartItem.quantity = quantityInput;
+              quantityLabel.innerHTML = quantityInput;
+            }
+          })
+        }
+        updateCartQuantity();
       });
     });
  
