@@ -149,13 +149,19 @@ document.querySelectorAll(".js-delete-link")
         
 
         const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+
+      
+
         if(newQuantity > 0 && newQuantity < 1000) {
           cart.forEach(cartItem => {
             if(cartItem.productId === productId){
               cartItem.quantity = newQuantity;
               quantityLabel.innerHTML = newQuantity;
             }
-          })
+          });
+        } else {
+          alert(`Quantity must be at least 1 and less than 1000`);
+          return;
         }
         updateCartQuantity(productId, newQuantity);
       });
