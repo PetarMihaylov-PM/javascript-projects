@@ -11,7 +11,6 @@ export function renderOrderSummary(){
 
   let cartSummaryHTML = '';
   updateCartQuantity();
-
   cart.forEach(cartItem => {
 
     const productId = cartItem.productId;
