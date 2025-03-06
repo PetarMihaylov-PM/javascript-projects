@@ -1,6 +1,5 @@
 class Cart{
-  cartItems = undefined;
-  localStorageKey = undefined;
+  cartItems;
 
   constructor(localStorageKey){
     this.localStorageKey = localStorageKey;
@@ -106,8 +105,6 @@ class Cart{
 
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
-
-
 
 console.log(cart);
 console.log(businessCart);
