@@ -53,7 +53,6 @@ class Clothing extends (Product){
     <a href="${this.sizeChartLink}"  target="_blank"> Size chart </a>
     `
   }
-
 }
 
 export const products = [
@@ -721,3 +720,35 @@ export const products = [
   }
   return new Product(productDetails);
 });
+
+
+class Car {
+  speed = 0;
+  topSpeed = 200;
+  constructor(brand, model){
+    this.brand = brand;
+    this.model = model;
+  }
+  
+  displayInfo(){
+    console.log(`${this.brand} ${this.model} ${this.speed} - Top speed: ${this.topSpeed}`);
+  }
+
+  go(){
+    this.speed += 5;
+  }
+
+  brake(){
+    this.speed -= 5;
+  }
+}
+
+class RaceCar extends Car{
+  topSpeed = 300;
+}
+
+const car1 = new Car ('Toyota', 'Auris');
+console.log(car1);
+car1.displayInfo();
+const raceCar = new RaceCar('Alfa', '159');
+raceCar.displayInfo();
