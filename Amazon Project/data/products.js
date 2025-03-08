@@ -68,7 +68,9 @@ export function loadProductsFetch() {
         return new Clothing(productDetails);
       }
       return new Product(productDetails);
-    });    
+    }); 
+  }).catch(() => {
+    console.log('Unexpected error. Please try again later.')
   });
   return promise;
 }
