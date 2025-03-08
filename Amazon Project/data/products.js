@@ -55,6 +55,30 @@ class Clothing extends (Product){
   }
 }
 
+
+export let products = [];
+
+function loadProducts() {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if(productDetails.type === "clothing"){
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log(products);
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+loadProducts();
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -720,35 +744,4 @@ export const products = [
   }
   return new Product(productDetails);
 });
-
-
-class Car {
-  speed = 0;
-  topSpeed = 200;
-  constructor(brand, model){
-    this.brand = brand;
-    this.model = model;
-  }
-  
-  displayInfo(){
-    console.log(`${this.brand} ${this.model} ${this.speed} - Top speed: ${this.topSpeed}`);
-  }
-
-  go(){
-    this.speed += 5;
-  }
-
-  brake(){
-    this.speed -= 5;
-  }
-}
-
-class RaceCar extends Car{
-  topSpeed = 300;
-}
-
-const car1 = new Car ('Toyota', 'Auris');
-console.log(car1);
-car1.displayInfo();
-const raceCar = new RaceCar('Alfa', '159');
-raceCar.displayInfo();
+*/

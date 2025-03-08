@@ -104,6 +104,7 @@ function Cart(localStorageKey) {
 const cart = Cart('cart-oop');
 const businessCart = Cart('cart-business');
 
+cart.addToCart('')
 cart.loadFromStorage();
 businessCart.loadFromStorage();
 
