@@ -1,7 +1,7 @@
 import { orders } from "../data/orders.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { formatCurrency } from "./utils/money.js";
+import { getDate } from "./orders/getDate.js";
 
 async function loadPage() {
   try{
@@ -10,7 +10,6 @@ async function loadPage() {
   } catch(error) {
     console.log('Unexpected error. Please try again later.');
   }
-
   
   let ordersHtml = ``;
   console.log(orders)
@@ -21,7 +20,7 @@ async function loadPage() {
 
     const orderId = order.id;
     const orderDate = getDate(order.orderTime);
-    const totalCostCents = orders.totalCostCents;
+    const totalCostCents = order.totalCostCents;
 
     const orderProducts = order.products;
 
@@ -33,7 +32,6 @@ async function loadPage() {
       const quantity = product.quantity;
       
       let matchingProduct = getProduct(productId);
-      
 
       productsHtml += `
       <div class="order-details-grid">
@@ -78,7 +76,7 @@ async function loadPage() {
           </div>
           <div class="order-total">
             <div class="order-header-label">Total:</div>
-            <div>${formatCurrency(totalCostCents)}</div>
+            <div>$${formatCurrency(totalCostCents)}</div>
           </div>
         </div>
 
@@ -93,14 +91,12 @@ async function loadPage() {
     </div>
     `
   });
+
+  document.querySelector('.orders-grid').innerHTML = ordersHtml;
 }
 loadPage();
 
 
-function getDate(estimatedDate) {
-  const [dateOnly] = estimatedDate.split('T');
-  const modifiedDate = dayjs(dateOnly).format('MMMM D');
-  return modifiedDate;
-}
+
 
 
