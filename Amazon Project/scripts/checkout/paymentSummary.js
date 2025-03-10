@@ -3,6 +3,7 @@ import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
 import { addOrder } from "../../data/orders.js";
+import { clearCart } from "../../data/cart.js";
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;
@@ -79,5 +80,6 @@ export function renderPaymentSummary() {
       }
      
       window.location.href = 'orders.html';
+      clearCart();
     });
 }

@@ -1,7 +1,9 @@
+
 import { orders } from "../../data/orders.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { getDate } from "./getDate.js";
+import { calculateCartQuantity, updateCartQuantity } from "../../data/cart.js";
 
 
 export function renderPlacedOrders(){
@@ -85,4 +87,5 @@ export function renderPlacedOrders(){
     });
 
     document.querySelector('.orders-grid').innerHTML = ordersHtml;
+    document.querySelector('.js-orders-cart-quantity').innerHTML = calculateCartQuantity();
   }
