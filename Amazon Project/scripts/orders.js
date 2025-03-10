@@ -1,53 +1,79 @@
 import { orders } from "../data/orders.js";
-import { getProduct } from "../data/products.js";
+import { getProduct, products, loadProductsFetch } from "../data/products.js";
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
+async function loadPage() {
+  try{
+    await loadProductsFetch();
+    const value = await new Promise((resolve) => {
+    loadCart(() => {
+      resolve();
+      });
+    });
 
-let html = '';
+  } catch(error) {
+    console.log('Unexpected error. Please try again later.');
+  }
 
-console.log(orders);
+  let html = '';
 
-orders.forEach(order => {
+  console.log(orders);
 
-  const orderId = order.id;
-  const orderDate = order.orderTime; // have to modify
-  console.log(orderId , orderDate)
+  orders.forEach(order => {
 
-  const products = order.products;
-  products.forEach(product => {
+    const orderId = order.id;
+    const orderDate = order.orderTime; // have to modify
+    console.log(orderId , orderDate)
 
-    const productId = product.productId;
-    const quantity = product.quantity;
-    const matchingProduct = getProduct(productId);
+    const orderProducts = order.products;
 
-    html += `
-    <div class="product-image-container">
-      <img src="images/products/athletic-cotton-socks-6-pairs.jpg">
-    </div>
+    orderProducts.forEach(product => {
+      
+      const productId = product.productId;
+      const deliveryDateProduct = product.estimatedDeliveryTime.split('T')[0];
+      const formatedDeliveryDate = dayjs(deliveryDateProduct).format('MMMM D');
+      console.log(formatedDeliveryDate)
+      
+      
+      const quantity = product.quantity;
+      
+      let matchingProduct = getProduct(productId);
+      
 
-    <div class="product-details">
-      <div class="product-name">
-        Black and Gray Athletic Cotton Socks - 6 Pairs
+      html += `
+      <div class="product-image-container">
+        <img src="${matchingProduct.image}">
       </div>
-      <div class="product-delivery-date">
-        Arriving on: August 15
-      </div>
-      <div class="product-quantity">
-        Quantity: 1
-      </div>
-      <button class="buy-again-button button-primary js-buy-again-button">
-        <img class="buy-again-icon" src="images/icons/buy-again.png">
-        <span class="buy-again-message">Buy it again</span>
-      </button>
-    </div>
 
-    <div class="product-actions">
-      <a href="tracking.html?orderId=123&productId=456">
-        <button class="track-package-button button-secondary">
-          Track package
+      <div class="product-details">
+        <div class="product-name">
+          ${matchingProduct.name}
+        </div>
+        <div class="product-delivery-date">
+          Arriving on: ${formatedDeliveryDate}
+        </div>
+        <div class="product-quantity">
+          Quantity: ${quantity}
+        </div>
+        <button class="buy-again-button button-primary js-buy-again-button">
+          <img class="buy-again-icon" src="images/icons/buy-again.png">
+          <span class="buy-again-message">Buy it again</span>
         </button>
-      </a>
-    </div>
-    `
+      </div>
+
+      <div class="product-actions">
+        <a href="tracking.html?orderId=${orderId}&productId=${productId}">
+          <button class="track-package-button button-secondary">
+            Track package
+          </button>
+        </a>
+      </div>
+      `
+    });
+
   });
-});
+}
+loadPage();
+
+
 
