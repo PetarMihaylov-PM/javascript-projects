@@ -3,7 +3,8 @@ import { orders } from "../../data/orders.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { getDate } from "./getDate.js";
-import { calculateCartQuantity, updateCartQuantity } from "../../data/cart.js";
+import { addToCart } from "../../data/cart.js";
+import { displayCartQuantity } from "./displayCartQuantity.js";
 
 
 export function renderPlacedOrders(){
@@ -43,7 +44,8 @@ export function renderPlacedOrders(){
             <div class="product-quantity">
               Quantity: ${quantity}
             </div>
-            <button class="buy-again-button button-primary js-buy-again-button">
+            <button class="buy-again-button button-primary js-buy-again-button"
+            data-product-id=${productId}>
               <img class="buy-again-icon" src="images/icons/buy-again.png">
               <span class="buy-again-message">Buy it again</span>
             </button>
@@ -87,5 +89,16 @@ export function renderPlacedOrders(){
     });
 
     document.querySelector('.orders-grid').innerHTML = ordersHtml;
-    document.querySelector('.js-orders-cart-quantity').innerHTML = calculateCartQuantity();
+    displayCartQuantity();
+
+    document.querySelectorAll('.js-buy-again-button')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+        addToCart(productId);
+        displayCartQuantity();
+      });
+    });
   }
+
+  
