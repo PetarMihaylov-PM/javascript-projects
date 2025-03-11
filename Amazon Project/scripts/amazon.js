@@ -7,11 +7,16 @@ function renderProductsGrid() {
 
   products.forEach(product => {
     const url = new URL(window.location.href);
-  })
+    const search = url.searchParams.get('search');
 
+    let filteredProducts = products;
 
-
-
+    if(search) {
+      filteredProducts = products.filter((product) => {
+        return product.name.includes(search);
+      })
+    }
+  });
 
 
   updateCartQuantity();
