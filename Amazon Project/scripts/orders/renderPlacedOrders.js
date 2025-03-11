@@ -100,17 +100,6 @@ export function renderPlacedOrders(){
         displayCartQuantity();
       });
     });
-
-
-
-    document.querySelectorAll('.js-tracking-button')
-      .forEach(button => {
-        button.addEventListener('click', () => {
-          const orderId = button.dataset.orderId;
-          const productId = button.dataset.productId;
-          
-        });
-      });
   }
 
   
