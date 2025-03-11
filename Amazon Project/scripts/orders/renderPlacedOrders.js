@@ -53,7 +53,8 @@ export function renderPlacedOrders(){
 
           <div class="product-actions">
             <a href="tracking.html?orderId=${orderId}&productId=${productId}">
-              <button class="track-package-button button-secondary">
+              <button class="track-package-button button-secondary js-tracking-button"
+              data-order-id=${orderId} data-product-id=${productId}>
                 Track package
               </button>
             </a>
@@ -99,6 +100,17 @@ export function renderPlacedOrders(){
         displayCartQuantity();
       });
     });
+
+
+
+    document.querySelectorAll('.js-tracking-button')
+      .forEach(button => {
+        button.addEventListener('click', () => {
+          const orderId = button.dataset.orderId;
+          const productId = button.dataset.productId;
+          
+        });
+      });
   }
 
   
