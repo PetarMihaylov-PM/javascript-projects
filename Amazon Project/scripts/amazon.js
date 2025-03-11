@@ -1,9 +1,19 @@
-import { cart, addToCart, calculateCartQuantity } from "../data/cart.js";
+import { addToCart, calculateCartQuantity } from "../data/cart.js";
 import { products, loadProducts } from "../data/products.js";
 
 loadProducts(renderProductsGrid);
 
 function renderProductsGrid() {
+
+  products.forEach(product => {
+    const url = new URL(window.location.href);
+  })
+
+
+
+
+
+
   updateCartQuantity();
   let productsHTML = '';
 

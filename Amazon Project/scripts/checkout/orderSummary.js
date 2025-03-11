@@ -77,7 +77,6 @@ export function renderOrderSummary(){
   function deliveryOptionsHTML (matchingProduct, cartItem) {
     let HTML = '';
 
-
     deliveryOptions.forEach(deliveryOption => {
       const today = dayjs();
       const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
@@ -175,7 +174,6 @@ export function renderOrderSummary(){
           }
           updateCartQuantity();
       }
-
 
       document.querySelectorAll('.js-delivery-option').
         forEach(element => {
