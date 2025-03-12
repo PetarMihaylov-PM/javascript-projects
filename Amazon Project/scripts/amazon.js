@@ -4,8 +4,8 @@ import { products, loadProducts } from "../data/products.js";
 loadProducts(renderProductsGrid);
 
 function renderProductsGrid() {
-
   updateCartQuantity();
+
   let productsHTML = '';
 
   const url = new URL (window.location.href);
@@ -15,8 +15,17 @@ function renderProductsGrid() {
 
   if(search){
     filteredProducts = products.filter(product => {
-      return product.name.includes(search);
-    })
+      let matchingKeywords = false;
+
+      product.keywords.forEach(keyword => {
+        if(keyword.toLowerCase().includes(search.toLowerCase())){
+          matchingKeywords = true;
+        }
+      });
+
+      return matchingKeywords || 
+        product.name.toLowerCase().includes(search.toLowerCase());
+    });
   }
 
   filteredProducts.forEach(product => {
