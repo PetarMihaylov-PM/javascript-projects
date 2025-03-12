@@ -62,6 +62,7 @@ export function renderPaymentSummary() {
 
   document.querySelector('.js-place-order')
     .addEventListener('click', async () => {
+      let emptyCart = true;
       try{
         const response = await fetch('https://supersimplebackend.dev/orders', {
           method: 'POST',
@@ -73,13 +74,20 @@ export function renderPaymentSummary() {
           })
         });
         const order = await response.json();
-        addOrder(order);
+        if(!order.errorMessage){
+          emptyCart = false;
+          addOrder(order);
+        }
 
       } catch (error){
         console.log('Unexpected error. Try again later.');
       }
-     
-      window.location.href = 'orders.html';
-      clearCart();
+
+      if(emptyCart){
+        alert('Your cart is empty. Please add a product before placing an order.');
+      } else {
+        window.location.href = 'orders.html';
+        clearCart();
+      }
     });
 }
