@@ -3,8 +3,10 @@ import { getDate } from "../orders/getDate.js";
 import { getProduct } from "../../data/products.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { calculateProgressBar, calculateDeliveryTime } from "./progressBar.js";
+import { calculateCartQuantity } from "../../data/cart.js";
 
 export function renderTrackingProduct() {
+
   const url = new URL(window.location.href);
   const orderId = url.searchParams.get('orderId');
   const productId = url.searchParams.get('productId');
@@ -12,9 +14,9 @@ export function renderTrackingProduct() {
 
   let matchingOrder;
     orders.forEach(order => {
-    if(order.id === orderId){
-      matchingOrder = order;
-    }
+      if(order.id === orderId){
+        matchingOrder = order;
+      }
     });
   
     let matchingProduct;
@@ -29,12 +31,14 @@ export function renderTrackingProduct() {
     const [productDeliveryDate] = matchingProduct.estimatedDeliveryTime.split('T');
     const productQuantity = matchingProduct.quantity;
 
-
     const currentTime = dayjs();
     const orderTime = dayjs(matchingOrder.orderTime);
-    const deliveryTime = matchingProduct.estimatedDeliveryTime;
+    const deliveryTime = dayjs(matchingProduct.estimatedDeliveryTime);
 
     const calculateDeliveryProgress = calculateDeliveryTime(currentTime, orderTime, deliveryTime);
+
+    const deliveryMessage = currentTime < deliveryTime ? 
+      'Arriving on:' : 'Delivered on:';
   
     let html = `
       <div class="order-tracking">
@@ -43,7 +47,7 @@ export function renderTrackingProduct() {
         </a>
   
         <div class="delivery-date">
-          Arriving on ${getDate(productDeliveryDate)}
+          ${deliveryMessage} ${getDate(productDeliveryDate)}
         </div>
   
         <div class="product-info">
@@ -76,4 +80,6 @@ export function renderTrackingProduct() {
 
     document.querySelector('.main').innerHTML = html;
     calculateProgressBar(calculateDeliveryProgress);
+
+    document.querySelector('.cart-quantity').innerHTML = calculateCartQuantity();
 }

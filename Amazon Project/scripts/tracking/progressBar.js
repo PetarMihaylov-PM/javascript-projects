@@ -9,6 +9,6 @@ export function calculateProgressBar(calculateDeliveryProgress) {
 }
 
 export function calculateDeliveryTime(currentTime, orderTime, deliveryTime){
-  const calculateDeliveryProgress = Math.abs(((currentTime.diff(orderTime)) / orderTime.diff(deliveryTime)) * 100).toFixed();
+  const calculateDeliveryProgress = (((currentTime - orderTime) / (deliveryTime - orderTime)) * 100).toFixed();
   return calculateDeliveryProgress;
 }
