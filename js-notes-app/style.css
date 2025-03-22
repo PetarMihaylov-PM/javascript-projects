@@ -1,0 +1,69 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+.container{
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(125deg, rgba(72, 188, 40, 0.937),rgb(133, 188, 252));
+  color: rgb(255, 255, 255);
+  padding-top: 4%;
+  padding-left: 10%;
+}
+.container h1{
+  display: flex;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 600;
+
+}
+.container h1 img{
+  width: 60px;
+}
+.container button img{
+  width: 25px;
+  margin-right: 8px;
+
+}
+.container button{
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, rgb(8, 98, 0), rgb(3, 72, 18));
+  color: white;
+  font-size: 18px;
+  outline: 0;
+  border: 0;
+  border-radius: 30px;
+  padding: 15px 25px;
+  margin: 30px 0 20px;
+  cursor: pointer;
+  transition: all 0.5 ease;
+}
+.container button:hover{
+  background: linear-gradient(180deg, rgb(82, 103, 81), rgb(45, 113, 60));
+}
+.container button:active{
+  background: linear-gradient(180deg, rgb(6, 57, 1), rgb(2, 51, 13));
+}
+.input-box{
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  min-height: 150px;
+  background: white;
+  color: black;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 15px;
+  outline: none;
+}
+.notes-container img{
+  width: 25px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
