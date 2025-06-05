@@ -52,6 +52,8 @@ function checkAnswer(currentLevel) {
     setTimeout(() => {
       $('body').removeClass('game-over');
     }, 300);
+
+    startOver();
   }
 }
 
