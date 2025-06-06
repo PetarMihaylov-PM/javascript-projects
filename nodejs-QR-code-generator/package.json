@@ -1,0 +1,16 @@
+{
+  "name": "qrcode-npm",
+  "version": "1.0.0",
+  "description": "qr-code generator",
+  "license": "ISC",
+  "author": "Petar Mihaylov",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "inquirer": "^12.6.3",
+    "qr-image": "^3.2.0"
+  }
+}
