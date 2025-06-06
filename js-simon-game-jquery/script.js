@@ -8,6 +8,7 @@ let level = 0;
   $(document).keydown(() => { 
     if(!gameOn){
       $('#level-title').html('Level ' + level)
+      $('#level-title').removeClass('animation');
       nextMove();
       gameOn = true;
     }
@@ -48,6 +49,7 @@ function checkAnswer(currentLevel) {
     playSound('wrong');
     $('body').addClass('game-over');
     $('#level-title').text('Game Over! Press any key to restart.');
+    $('#level-title').addClass('animation');
 
     setTimeout(() => {
       $('body').removeClass('game-over');
